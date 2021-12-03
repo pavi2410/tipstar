@@ -16,6 +16,7 @@ async function stubIndexHtml() {
     data = data
       .replace('"./main.tsx"', `"http://localhost:${port}/${view}/main.tsx"`)
       .replace('"./main.ts"', `"http://localhost:${port}/${view}/main.ts"`)
+      .replace('"./main.js"', `"http://localhost:${port}/${view}/main.js"`)
       .replace(
         '<div id="app"></div>',
         '<div id="app">Vite server did not start</div>'
@@ -23,6 +24,11 @@ async function stubIndexHtml() {
     await fs.writeFile(r(`extension/dist/${view}/index.html`), data, "utf-8");
     log("PRE", `stub ${view}`);
   }
+
+  await fs.ensureDir(r(`extension/dist/background`));
+  let data = await fs.readFile(r(`src/background/main.js`), "utf-8");
+  await fs.writeFile(r(`extension/dist/background/main.js`), data, "utf-8");
+  log("PRE", `stub background/main.js`);
 }
 
 function writeManifest() {

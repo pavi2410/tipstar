@@ -11,7 +11,7 @@ import { ContentApp } from "./views/ContentApp";
 
   // communication example: send previous tab title from background page
   onMessage("tab-prev", ({ data }) => {
-    console.log(`[vitesse-webext] Navigate from page "${data}"`);
+    console.log(`[vitesse-webext] Navigate from page "${JSON.stringify(data)}"`);
   });
 
   // mount component to context window
