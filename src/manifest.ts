@@ -23,7 +23,7 @@ export async function getManifest() {
       chrome_style: false,
     },
     background: {
-      scripts: ['./dist/background/main.js'],
+      page: './dist/background/index.html',
       persistent: false,
     },
     icons: {
