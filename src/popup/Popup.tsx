@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Heading, VStack } from '@chakra-ui/react'
+import { Button, Heading, VStack, Input } from '@chakra-ui/react'
 import browser from "webextension-polyfill";
 
 import { createClient } from '@supabase/supabase-js'
@@ -62,15 +62,14 @@ function LoginPage() {
     }
   }
 
-
   return (
-    <VStack>
+    <VStack p={4}>
       <Heading>tipstar</Heading>
       <p>Login to continue...</p>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <Button onClick={() => login()} >Login</Button>
-      <Button >Not a user? Signup</Button>
+      <Input type="email" placeholder="Your Email" variant="outline" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <Input type="password" placeholder="Password here" variant="outline" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <Button onClick={() => login()} colorScheme="blue" w="full">Login</Button>
+      <Button variant="outline" w="full">Not a user? Signup</Button>
     </VStack>
   )
 }
