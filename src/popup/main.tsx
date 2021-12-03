@@ -2,7 +2,7 @@ import "../styles";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Popup } from "./Popup";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 
 ReactDOM.render(
   <React.StrictMode>
