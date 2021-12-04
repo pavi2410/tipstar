@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Button, Heading, VStack, Input, ButtonGroup, Text } from '@chakra-ui/react'
+import { Button, Heading, VStack, Input, ButtonGroup, Text, chakra } from '@chakra-ui/react'
 import browser from "webextension-polyfill";
 import {
   MemoryRouter,
@@ -23,12 +23,6 @@ export function Popup() {
       setUser(user)
     })
   }, [])
-
-  // if (!user) {
-  //   return (
-  //     <LoginPage />
-  //   )
-  // }
 
   return (
     <MemoryRouter initialEntries={["/"]}>
@@ -71,11 +65,13 @@ function MainPage() {
     }
   }
 
+  //start
+
   return (
     <VStack p={4}>
       <Heading>tipstar</Heading>
       <p>You're currenly on: {currentUrl}</p>
-      <p>Session: {JSON.stringify(session, null, 2)}</p>
+      <p>Session: {session ? session.user.email : "Not logged in"}</p>
       <Button colorScheme='blue' w="full" onClick={() => support()}>Support this site</Button>
     </VStack>
   );
@@ -174,6 +170,7 @@ function StartPayment() {
 }
 
 function Payment() {
+  const navigate = useNavigate();
   const { search } = useLocation();
   const amount = useMemo(() => new URLSearchParams(search).get("amount"), [search])
 
@@ -188,11 +185,12 @@ function Payment() {
     <VStack p={4}>
       <Heading>tipstar</Heading>
       <p>Support this site...</p>
-      <Text color='tomato' fontSize='lg'>Pay using this link</Text>
+      <Text color='green' fontSize='lg'>Pay using this link</Text>
       <Text fontSize='lg'>{paymentLink}</Text>
-      <a href={paymentLink} target="_blank" rel="noreferrer">
-        <Button w="full" colorScheme="blue">Pay</Button>
-      </a>
+      <chakra.a href={paymentLink} target="_blank" rel="noreferrer" w="full">
+        <Button w="full" colorScheme="green">Pay</Button>
+      </chakra.a>
+      <Button w="full" variant="outline" colorScheme="red" onClick={() => navigate('/')}>Back to home</Button>
     </VStack>
   )
 }
