@@ -1,52 +1,16 @@
-# WebExtension Vite Starter
+# tipstar
 
-A [Vite](https://vitejs.dev/) powered WebExtension ([Chrome](https://developer.chrome.com/docs/extensions/reference/), [FireFox](https://addons.mozilla.org/en-US/developers/), etc.) starter template.
-
-Made based on https://github.com/antfu/vitesse-webext, big thanks to @antfu!
-
-## Features
-
-- ⚡️ **Instant HMR** - use **Vite** on dev (no more refresh!)
-- 🦾 [TypeScript](https://www.typescriptlang.org/) - type safe
-- 🖥 Content Script - UseReact even in content script
-- 🌍 WebExtension - isomorphic extension for Chrome, Firefox, and others
-- 📃 Dynamic `manifest.json` with full type support
-
-## Pre-packed
-
-### WebExtension Libraries
-
-- [`webextension-polyfill`](https://github.com/mozilla/webextension-polyfill) - WebExtension browser API Polyfill with types
-- [`webext-bridge`](https://github.com/antfu/webext-bridge) - effortlessly communication between contexts
-
-### Coding Style
-
-- [ESLint](https://eslint.org/)
-
-### Dev tools
-
-- [TypeScript](https://www.typescriptlang.org/)
-- [esno](https://github.com/antfu/esno) - TypeScript / ESNext node runtime powered by esbuild
-- [npm-run-all](https://github.com/mysticatea/npm-run-all) - Run multiple npm-scripts in parallel or sequential
-- [web-ext](https://github.com/mozilla/web-ext) - Streamlined experience for developing web extensions
-
-## Use the Template
-
-### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/quolpr/react-vite-webext/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit quolpr/react-vite-webext my-webext
-cd my-webext
-yarn
-```
+A browser extension that allows users to support the creators on the web directly using Razorpay.
 
 ## Usage
+1. Click "Support this site" button in the extension popup on any active tab.
+2. If not already logged in, login using the credentials `hello@pavi2410.me` and `testpw123`.
+3. After you're logged in, you'll be asked to enter an amount you want to support the site with.
+4. After that, you'll be presented the payment link with a button on which you can click to proceed to the Razopay's payment flow.
+5. Upon successful payment, you'll receive a confirmation email describing the payment information along with the invoice of the transaction.
+6. Congrats, you just supported your favourite web creator! 
+
+## Instructions to Run
 
 ### Folders
 
@@ -62,28 +26,31 @@ yarn
 
 ### Development
 
-```bash
-yarn dev
-```
+First of all, make sure you have Node.js and npm installed.
 
-Then **load extension in browser with the `extension/` folder**.
-
-For Firefox developers, you can run the following command instead:
+Then, run the following commands
 
 ```bash
-yarn start:firefox
+npm install
 ```
 
-`web-ext` auto reload the extension when `extension/` files changed.
+```bash
+npm dev
+```
+(Keep this window running)
 
-> While Vite handles HMR automatically in the most of the case, [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) is still recommanded for cleaner hard reloading.
+To load the extension in the browser, you can run the following command on a new terminal window:
+
+| Firefox | Chrome |
+|---|---|
+| ```npm start:firefox``` | ```npm start:chromium``` |
 
 ### Build
 
 To build the extension, run
 
 ```bash
-yarn build
+npm build
 ```
 
 And then pack files under `extension`, you can upload `extension.crx` or `extension.xpi` to appropriate extension store.
