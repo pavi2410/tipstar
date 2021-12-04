@@ -76,7 +76,7 @@ function MainPage() {
       <Heading>tipstar</Heading>
       <p>You're currenly on: {currentUrl}</p>
       <p>Session: {JSON.stringify(session, null, 2)}</p>
-      <Button colorScheme='blue' onClick={() => support()}>Support this site</Button>
+      <Button colorScheme='blue' w="full" onClick={() => support()}>Support this site</Button>
     </VStack>
   );
 };
@@ -152,16 +152,15 @@ function StartPayment() {
   const [amount, setAmount] = useState("");
 
   const getLink = () => {
-    console.log(amount);
-    setAmount("");
-    navigate("/payment")
+    console.log('Amount:', amount);
+    navigate(`/payment?amount=${amount}`)
   }
 
   return (
     <VStack p={4}>
       <Heading>tipstar</Heading>
       <p>Support this site...</p>
-      <Text fontSize='lg'>Pay to: <span style={{fontSize:"1rem"}}>{currentUrl}</span></Text>
+      <Text fontSize='lg'>Pay to: <span style={{ fontSize: "1rem" }}>{currentUrl}</span></Text>
       <Text fontSize='lg'>Amount: </Text>
       <ButtonGroup variant='outline' spacing='2'>
         <Button colorScheme='blue' onClick={(e) => setAmount(50)}>₹50</Button>
@@ -175,12 +174,25 @@ function StartPayment() {
 }
 
 function Payment() {
+  const { search } = useLocation();
+  const amount = useMemo(() => new URLSearchParams(search).get("amount"), [search])
+
+  const [paymentLink, setPaymentLink] = useState("")
+
+  useEffect(() => {
+    // razorpay payment link
+    setPaymentLink("https://rzp.io/l/CiOjnII")
+  }, [amount])
+
   return (
     <VStack p={4}>
       <Heading>tipstar</Heading>
       <p>Support this site...</p>
       <Text color='tomato' fontSize='lg'>Pay using this link</Text>
-      <a href="https://www.google.com" target="_blank">click this</a>
+      <Text fontSize='lg'>{paymentLink}</Text>
+      <a href={paymentLink} target="_blank" rel="noreferrer">
+        <Button w="full" colorScheme="blue">Pay</Button>
+      </a>
     </VStack>
   )
 }

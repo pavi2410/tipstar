@@ -15,7 +15,10 @@ function initSupabase() {
 async function updateUrlCount(url) {
   const userId = await browser.storage.local.get('userId');
   console.log('Incrementing url count', url, userId)
-  await supabase.rpc('increment_url_count', { url, userId });
+  await supabase
+    .from('views')
+    .upsert({ 'id': 3, 'user_id': userId, 'url': url })
+    .execute();
 }
 
 async function updateCount(tabId) {
